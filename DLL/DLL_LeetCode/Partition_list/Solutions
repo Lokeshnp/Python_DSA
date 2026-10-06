@@ -1,0 +1,168 @@
+# def partition_list(self, x):
+#         if not self.head:
+#             return None
+    
+#         dummy1 = Node(0)
+#         dummy2 = Node(0)
+#         prev1 = dummy1
+#         prev2 = dummy2
+#         current = self.head
+    
+#         while current:
+#             if current.value < x:
+#                 prev1.next = current
+#                 current.prev = prev1
+#                 prev1 = current
+                
+#             else:
+#                 prev2.next = current
+#                 current.prev = prev2
+#                 prev2 = current
+#             current = current.next
+        
+#         prev1.next = dummy2.next
+#         if dummy2.next:
+#             dummy2.next.prev = prev1
+#         prev2.next = None
+        
+#         self.head = dummy1.next
+#         self.head.prev = None
+
+
+
+
+# 🧠 Explanation of the Code
+
+# We use two dummy nodes:
+
+# dummy1 for the list of nodes with values less than x.
+
+# dummy2 for the list of nodes with values greater than or equal to x.
+
+# prev1 and prev2 are pointers that build the two separate lists.
+
+# We loop through the original list:
+
+# If current.value < x, we attach it after prev1.
+
+# Otherwise, we attach it after prev2.
+
+# We correctly update both .next and .prev pointers during the attachment.
+
+# After traversal:
+
+# We terminate the greater list by setting prev2.next = None.
+
+# We connect the two lists by linking prev1.next = dummy2.next.
+
+# We update the .prev of the new greater list head back to prev1 if needed.
+
+# Finally:
+
+# The new head of the list is set to dummy1.next.
+
+# And we ensure self.head.prev = None to properly set the head’s .prev.
+
+# This handles all cases:
+
+# Empty list
+
+# All nodes < x
+
+# All nodes >= x
+
+# Mixed lists
+
+
+
+
+
+# Code with inline comments:
+
+
+
+# def partition_list(self, x):
+#     # ------------------------------------------------
+#     # If the list is empty, return immediately
+#     # Nothing to partition
+#     # ------------------------------------------------
+#     if not self.head:
+#         return None
+ 
+#     # ------------------------------------------------
+#     # Create two dummy nodes to serve as the starting
+#     # points for the two new partitions
+#     # dummy1 → nodes with values < x
+#     # dummy2 → nodes with values ≥ x
+#     # ------------------------------------------------
+#     dummy1 = Node(0)
+#     dummy2 = Node(0)
+ 
+#     # ------------------------------------------------
+#     # prev1 tracks the end of the < x partition
+#     # prev2 tracks the end of the ≥ x partition
+#     # ------------------------------------------------
+#     prev1 = dummy1
+#     prev2 = dummy2
+ 
+#     # Start at the head of the original list
+#     current = self.head
+ 
+#     # ------------------------------------------------
+#     # Traverse the original list and divide nodes
+#     # into two separate partitions based on their value
+#     # ------------------------------------------------
+#     while current:
+#         if current.value < x:
+#             # ----------------------------------------
+#             # Append current node to the < x list
+#             # Update pointers to maintain .next/.prev
+#             # ----------------------------------------
+#             prev1.next = current
+#             current.prev = prev1
+#             prev1 = current
+#         else:
+#             # ----------------------------------------
+#             # Append current node to the ≥ x list
+#             # Update pointers to maintain .next/.prev
+#             # ----------------------------------------
+#             prev2.next = current
+#             current.prev = prev2
+#             prev2 = current
+ 
+#         # Move to the next node in the original list
+#         current = current.next
+ 
+#     # ------------------------------------------------
+#     # Terminate the ≥ x list to prevent cycle or
+#     # trailing data from previous .next values
+#     # ------------------------------------------------
+#     prev2.next = None
+ 
+#     # ------------------------------------------------
+#     # Connect the two partitions:
+#     # Link the end of the < x list to the beginning
+#     # of the ≥ x list
+#     # ------------------------------------------------
+#     prev1.next = dummy2.next
+ 
+#     # ------------------------------------------------
+#     # If the ≥ x list has at least one node,
+#     # update its .prev to point to the < x list
+#     # ------------------------------------------------
+#     if dummy2.next:
+#         dummy2.next.prev = prev1
+ 
+#     # ------------------------------------------------
+#     # Update the head of the list to the start of
+#     # the < x partition (after dummy1)
+#     # ------------------------------------------------
+#     self.head = dummy1.next
+ 
+#     # ------------------------------------------------
+#     # Ensure the new head has no previous pointer
+#     # (important for DLL structure)
+#     # ------------------------------------------------
+#     self.head.prev = None
+
+

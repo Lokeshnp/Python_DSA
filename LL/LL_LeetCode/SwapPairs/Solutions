@@ -1,0 +1,86 @@
+# def swap_pairs(self):
+#         dummy = Node(0)
+#         dummy.next = self.head
+#         previous = dummy
+#         first = self.head
+    
+#         while first and first.next:
+#             second = first.next
+    
+#             # Perform the swap
+#             previous.next = second
+#             first.next = second.next
+#             second.next = first
+    
+#             # Move pointers
+#             previous = first
+#             first = first.next
+    
+#         self.head = dummy.next
+
+
+
+
+# 🧠 Explanation of the Code
+
+# The dummy node simplifies edge cases by providing a node before the head.
+
+# The two main pointers (previous and first) let us track where we are in the list.
+
+# At each step:
+
+# second is the next node after first.
+
+# We swap the nodes by carefully rewiring .next pointers:
+
+# previous.next points to second
+
+# first.next points to second.next
+
+# second.next points back to first
+
+# Then move previous to first, and first to first.next.
+
+# We continue this until there are no more pairs left.
+
+# Finally, we update self.head to dummy.next to ensure the new head is correct.
+
+
+
+
+
+# Code with Inline Comments:
+
+
+
+# def swap_pairs(self):
+#     # Create a dummy node to simplify head swaps
+#     dummy = Node(0)
+#     # Link dummy to the head of the list
+#     dummy.next = self.head
+#     # Set previous to dummy, before the pair
+#     previous = dummy
+#     # Set first to head, first node of pair
+#     first = self.head
+ 
+#     # Loop while there are two nodes to swap
+#     while first and first.next:
+#         # Second is the next node, pair's second
+#         second = first.next
+ 
+#         # Swap the pair:
+#         # Link previous to second (e.g., to 2)
+#         previous.next = second
+#         # Link first to node after second
+#         first.next = second.next
+#         # Link second to first to finish swap
+#         second.next = first
+ 
+#         # Update pointers for next pair:
+#         # Move previous to first (now second)
+#         previous = first
+#         # Move first to next node to process
+#         first = first.next
+ 
+#     # Set head to new first node after swaps
+#     self.head = dummy.next

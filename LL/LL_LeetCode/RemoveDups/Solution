@@ -1,0 +1,191 @@
+# For the optimal solution you will want to use a Set (you can read more about Sets here):
+
+# I have also included an implementation that does not use a Set at the bottom of this explanation.
+
+# Either solution will work but the one with Sets is O(n) while the other is O(n^2) time complexity.
+
+
+
+# Solution using nested loops:
+
+#     def remove_duplicates(self):
+#         current = self.head
+#         while current:
+#             # Start checking from the next node
+#             runner = current
+#             while runner.next:
+#                 # If the next node's value matches current's value, skip it
+#                 if runner.next.value == current.value:
+#                     runner.next = runner.next.next
+#                     self.length -= 1
+#                 else:
+#                     runner = runner.next
+#             current = current.next
+
+
+# Solution using a set:
+
+#     def remove_duplicates(self):
+#             values = set()
+#             previous = None
+#             current = self.head
+#             while current:
+#                 if current.value in values:
+#                     previous.next = current.next
+#                     self.length -= 1
+#                 else:
+#                     values.add(current.value)
+#                     previous = current
+#                 current = current.next
+
+
+
+
+# Let's break down the remove_duplicates function using a set:
+
+# This function aims to remove any duplicate nodes from a linked list. For instance, if you have a linked list:
+
+# 3 → 5 → 3 → 7 → 8 → 5 → 9
+# After removing duplicates, it should look like:
+
+# 3 → 5 → 7 → 8 → 9
+
+
+# Method Walkthrough:
+
+# def remove_duplicates(self):
+
+
+# Initialize a set to store unique values:
+
+# values = set()
+# We're using a set (values) because checking membership in a set is typically O(1), making it efficient for this operation. As we traverse the list, we'll add each encountered node's value to this set.
+
+
+
+# Setup initial pointers:
+
+# previous = None
+# current = self.head
+# The current pointer will traverse through the list, while previous will keep track of the last unique node.
+
+
+
+# Iterate through the list to remove duplicates:
+
+# while current:
+# This loop will traverse each node in the linked list.
+
+
+
+# Check if the current node's value is in our set of seen values:
+
+# if current.value in values:
+# If this condition is true, it means we've seen this value before, and therefore, the current node is a duplicate.
+
+
+
+# Remove the current node from the list:
+
+#     previous.next = current.next
+#     self.length -= 1
+# If the current node's value is a duplicate, we'll bypass it by pointing the next attribute of the previous node directly to current.next, effectively skipping over the current node. We then decrement the length of the linked list since we've removed a node.
+
+
+
+# Otherwise, if the value is unique (not seen before):
+
+# else:
+#     values.add(current.value)
+#     previous = current
+# If we haven't seen the current value before, we add it to our set (values) and move the previous pointer to point at the current node since it's unique.
+
+
+
+# Move to the next node:
+
+#     current = current.next
+# We update the current pointer to move on to the next node in the list for further processing.
+
+
+
+# Conclusion: The remove_duplicates method efficiently iterates through the linked list, maintaining a set of seen values. If a value is repeated, the node containing that value gets removed from the list. By the end of the function, all duplicate nodes in the linked list will have been removed. In our example, repeated nodes with values 3 and 5 are removed, leaving us with a linked list of unique values: 3 → 5 → 7 → 8 → 9.
+
+
+
+
+
+# Code with inline comments (using a set):
+
+
+
+# def remove_duplicates(self):
+#     # 1. Initialize a set called 'values' to store unique node values.
+#     values = set()
+    
+#     # 2. Initialize 'previous' to None. 
+#     # This will point to the last node we've seen that had a unique value.
+#     previous = None
+    
+#     # 3. Start at the head of the linked list.
+#     current = self.head
+ 
+#     # 4. Traverse through the linked list.
+#     while current:
+#         # 4.1. Check if the value of the current node is already in the set.
+#         if current.value in values:
+#             # 4.1.1. If yes, bypass this node by pointing the next of 
+#             # 'previous' to the next of 'current'.
+#             previous.next = current.next
+            
+#             # 4.1.2. Decrement the length of the list.
+#             self.length -= 1
+#         else:
+#             # 4.2. If not, add the value to the set.
+#             values.add(current.value)
+            
+#             # 4.2.1. Update the 'previous' to point to 'current' now.
+#             previous = current
+ 
+#         # 4.3. Move to the next node in the list.
+#         current = current.next
+
+
+
+
+# Code with inline comments (using nested loops):
+
+
+
+# def remove_duplicates(self):
+#     # Start 'current' at the head node to check each
+#     # node’s value for duplicates in the linked list.
+#     current = self.head
+    
+#     # Loop until 'current' is None (end of the list).
+#     # This visits every node to check for duplicates.
+#     while current:
+#         # 'runner' starts at 'current' to scan nodes
+#         # after it, looking for duplicate values.
+#         runner = current
+        
+#         # Loop while 'runner.next' exists to check the
+#         # next node’s value against 'current’s value.
+#         while runner.next:
+#             # If the next node’s value equals 'current’s,
+#             # it’s a duplicate and needs to be removed.
+#             if runner.next.value == current.value:
+#                 # Skip the duplicate by linking 'runner’s
+#                 # next pointer to the node after it.
+#                 runner.next = runner.next.next
+#                 # Decrease the list length by 1 since we
+#                 # removed a node.
+#                 self.length -= 1
+#             else:
+#                 # If no duplicate, move 'runner' to the
+#                 # next node to keep checking.
+#                 runner = runner.next
+        
+#         # Move 'current' to the next node to check for
+#         # duplicates of its value in later nodes.
+#         current = current.next

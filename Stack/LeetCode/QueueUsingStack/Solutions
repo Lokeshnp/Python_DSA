@@ -1,0 +1,124 @@
+# def enqueue(self, value):
+#         while len(self.stack1) > 0:
+#             self.stack2.append(self.stack1.pop())
+#         self.stack1.append(value)
+#         while len(self.stack2) > 0:
+#             self.stack1.append(self.stack2.pop())
+
+
+
+
+# This code implements the enqueue method for a queue that is implemented using two stacks. The purpose of the enqueue method is to add an element to the back of the queue.
+
+# Here's how the code works:
+
+
+
+# First, the code checks if stack1 has any elements in it. If stack1 is not empty, the code enters a while loop.
+
+# Inside the while loop, the code pops elements from stack1 one at a time and appends them to stack2. This is done so that we can add the new element to the bottom of stack1.
+
+# Once all elements have been transferred from stack1 to stack2, the code appends the new element value to the bottom of stack1.
+
+# Finally, the code enters another while loop to transfer all the elements from stack2 back to stack1 in their original order. This ensures that the queue is maintained in a First-In-First-Out (FIFO) ordering.
+
+
+
+
+
+# Code with inline comments:
+
+
+
+# def enqueue(self, value):
+#     # Transfer all elements from stack1 to stack2
+#     while len(self.stack1) > 0:
+#         self.stack2.append(self.stack1.pop())
+    
+#     # Add the new element to the bottom of stack1
+#     self.stack1.append(value)
+    
+#     # Transfer all elements back from stack2 to stack1
+#     while len(self.stack2) > 0:
+#         self.stack1.append(self.stack2.pop())
+
+
+#             self.stack1.append(self.stack2.pop())
+
+
+ 
+# All changes saved
+# |
+# Line 11, Column 49
+# Your code passed this test
+# Test Cases
+# Failed: 0, Passed: 3 of 3 tests
+# test_enqueue_after_empty
+# test_enqueue_multiple_values
+# test_enqueue_single_value
+# Coding Exercise
+
+# Completed
+# Start
+# Completed
+# Start
+# Completed
+# Start
+# Completed
+# Play
+# Completed
+# Start
+# Completed
+# Play
+# Completed
+# Start
+# Completed
+# Play
+# Completed
+# Start
+# Completed
+# Play
+# Completed
+# Start
+# Not completed
+# Start
+# information alert
+
+
+# ========================================================
+# def dequeue(self):
+#         if self.is_empty():
+#             return None
+#         else:
+#             return self.stack1.pop()
+
+
+
+
+# This code is the implementation of the dequeue method for a queue data structure implemented using two stacks.
+
+# The purpose of the dequeue method is to remove and return the first element in the queue. In this implementation, the first element is always at the bottom of stack1.
+
+# The code first checks if the queue is empty using the is_empty method. If the queue is empty, the method returns None because there are no elements to remove.
+
+# If the queue is not empty, the method removes and returns the last element in stack1 using the pop method. This is because the first element in the queue is always at the bottom of stack1, and pop removes elements from the end of a list.
+
+# Overall, this implementation of dequeue is efficient because it only requires popping elements from stack1. Any elements that were moved to stack2 during the enqueue operation are moved back to stack1 before the next dequeue operation, so there is no need to access stack2 in this method.
+
+
+
+
+
+# Code with inline comments:
+
+
+
+# def dequeue(self):
+#     # Check if the queue is empty
+#     if self.is_empty():
+#         # Return None if the queue is empty
+#         return None
+#     else:
+#         # Remove and return the last element in stack1
+#         # which is the first element in the queue
+#         return self.stack1.pop()

@@ -1,0 +1,104 @@
+# def reverse_between(self, start_index, end_index):
+#         if self.length <= 1 or start_index == end_index:
+#             return
+ 
+#         dummy = Node(0)
+#         dummy.next = self.head
+#         self.head.prev = dummy
+ 
+#         prev = dummy
+#         for _ in range(start_index):
+#             prev = prev.next
+ 
+#         current = prev.next
+ 
+#         for _ in range(end_index - start_index):
+#             node_to_move = current.next
+ 
+#             current.next = node_to_move.next
+#             if node_to_move.next:
+#                 node_to_move.next.prev = current
+ 
+#             node_to_move.next = prev.next
+#             prev.next.prev = node_to_move
+#             prev.next = node_to_move
+#             node_to_move.prev = prev
+ 
+#         self.head = dummy.next
+#         self.head.prev = None
+
+
+
+
+# 🧠 Explanation of the Code
+
+# We want to reverse a sublist within a doubly linked list from start_index to end_index.
+
+# We use a dummy node to simplify edge cases like modifying the head of the list.
+
+# We walk forward from the dummy to find the node before the reversal segment (prev).
+
+# current points to the start of the reversal segment.
+
+# In each iteration, we:
+
+# Remove current.next and re-insert it immediately after prev
+
+# This results in an in-place reversal of the sublist
+
+# After reversing, we reset the .head in case it changed due to head being part of the segment.
+
+# We ensure that self.head.prev is reset to None.
+
+
+
+
+
+# 🔧 Code with Inline Comments
+
+
+
+# def reverse_between(self, start_index, end_index):
+#     # ---------------------------------------------
+#     # Reverses the portion of the list between the
+#     # given start_index and end_index in-place.
+#     # Assumes 0-based indexing.
+#     # ---------------------------------------------
+ 
+#     # If the list has 0 or 1 nodes, or no change needed
+#     if self.length <= 1 or start_index == end_index:
+#         return
+ 
+#     # Create a dummy node before head to simplify edge cases
+#     dummy = Node(0)
+#     dummy.next = self.head
+#     self.head.prev = dummy
+ 
+#     # Traverse to the node just before the start_index
+#     prev = dummy
+#     for _ in range(start_index):
+#         prev = prev.next
+ 
+#     # current points to the first node in the segment to reverse
+#     current = prev.next
+ 
+#     # Reverse the segment using node splicing
+#     for _ in range(end_index - start_index):
+#         node_to_move = current.next
+ 
+#         # Detach node_to_move from its current position
+#         current.next = node_to_move.next
+#         if node_to_move.next:
+#             node_to_move.next.prev = current
+ 
+#         # Insert node_to_move right after prev
+#         node_to_move.next = prev.next
+#         prev.next.prev = node_to_move
+#         prev.next = node_to_move
+#         node_to_move.prev = prev
+ 
+#     # Update head pointer in case it was changed
+#     self.head = dummy.next
+#     self.head.prev = None
+
+

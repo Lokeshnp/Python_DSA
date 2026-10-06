@@ -1,0 +1,58 @@
+def sort_stack(stack):
+    additional_stack = Stack()
+ 
+    while not stack.is_empty():
+        temp = stack.pop()
+ 
+        while not additional_stack.is_empty() and additional_stack.peek() > temp:
+            stack.push(additional_stack.pop())
+ 
+        additional_stack.push(temp)
+ 
+    while not additional_stack.is_empty():
+        stack.push(additional_stack.pop())
+
+
+The sort_stack function sorts a given stack of integers in ascending order using only one additional stack. Here's how it works:
+
+First, the function creates a new stack called additional_stack to hold the sorted elements.
+
+Next, the function enters a while loop that continues until the original stack is empty. Inside the loop, the function removes the top element from the original stack using the pop method and stores it in a temporary variable called temp.
+
+The function then enters another while loop that continues until the additional_stack is empty or the top element of additional_stack is less than or equal to temp. Inside the loop, the function removes the top element from the additional_stack using the pop method and adds it back to the original stack using the push method.
+
+Once the inner while loop is exited, the function adds the temp variable to the additional_stack using the push method. This ensures that the additional_stack is always sorted in ascending order.
+
+Once the outer while loop is exited, the function enters another while loop that continues until the additional_stack is empty. Inside the loop, the function removes the top element from the additional_stack using the pop method and adds it back to the original stack using the push method. This step ensures that the original stack is sorted in ascending order.
+
+Finally, the function returns the sorted stack.
+
+Overall, this implementation has a time complexity of O(n^2), where n is the number of elements in the original stack, because the function performs nested loops to compare all the elements with each other. However, it has the advantage of using only one additional stack, which could be useful in certain situations where memory is limited.
+
+
+
+Code with inline comments:
+
+
+
+def sort_stack(stack):
+    # Create a new stack to hold the sorted elements
+    additional_stack = Stack()
+ 
+    # While the original stack is not empty
+    while not stack.is_empty():
+        # Remove the top element from the original stack
+        temp = stack.pop()
+ 
+        # While the additional stack is not empty and 
+        #the top element is greater than the current element
+        while not additional_stack.is_empty() and additional_stack.peek() > temp:
+            # Move the top element from the additional stack to the original stack
+            stack.push(additional_stack.pop())
+ 
+        # Add the current element to the additional stack
+        additional_stack.push(temp)
+ 
+    # Copy the sorted elements from the additional stack to the original stack
+    while not additional_stack.is_empty():
+        stack.push(additional_stack.pop())
